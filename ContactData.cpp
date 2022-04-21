@@ -5,14 +5,14 @@
 #include <iostream>
 #include "ContactData.h"
 
-ContactData::ContactData(int x, int y, int contact_num, int plate_num, const string& name) : Contact(x, y, contact_num, plate_num) {
-    this->x=x;
-    this->y=y;
-    this->plate_num=plate_num;
-    this->contact_num=contact_num;
+ContactData::ContactData(Device *device, int x, int y, int contact_num, int plate_num, const string& name) : Contact(device, x, y, contact_num, plate_num) {
+    this->setX(x);
+    this->setY(y);
+    this->setPlateNum(plate_num);
+    this->setContactNum(contact_num);
     this->linked={};
     this->device_name=name;
-    //this->device=device;
+    this->setDevice(device);
 }
 
 string ContactData::getDeviceName() {
@@ -61,7 +61,7 @@ void ContactData::unlink(ContactData *second) {
 
 int ContactData::isLinked(ContactData *contactData) {
     //В переменную s сохраню номер контакта, связь с которым нужно проверить
-    int s=contactData->contact_num;
+    int s=contactData->getContactNum();
     //cout << "s==" << s << endl;
     int i;
     for (i=0; i<this->linked.size(); i++) {
@@ -72,8 +72,6 @@ int ContactData::isLinked(ContactData *contactData) {
     return -1;
 }
 
-/*
-Device *ContactData::getDevice() {
-    return this->device;
+vector<ContactData *> ContactData::getLinked() {
+    return this->linked;
 }
-*/

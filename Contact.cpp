@@ -4,7 +4,7 @@
 
 #include "Contact.h"
 
-Contact::Contact(int x, int y, int contact_num, int plate_num, Device *device) {
+Contact::Contact(Device *device, int x, int y, int contact_num, int plate_num) {
     this->x=x;
     this->y=y;
     this->plate_num=plate_num;
@@ -12,19 +12,49 @@ Contact::Contact(int x, int y, int contact_num, int plate_num, Device *device) {
     this->device=device;
 }
 
-int Contact::getX() {
+int Contact::getX() const {
     return this->x;
 }
-int Contact::getY() {
+int Contact::getY() const {
     return this->y;
 }
 
-int Contact::getContactNum() {
+int Contact::getContactNum() const {
     return this->contact_num;
 }
 
-int Contact::getPlateNum() {
+int Contact::getPlateNum() const {
     return this->plate_num;
+}
+
+int Contact::setX(int x) {
+    if(x<0){return -1;}
+    this->x=x;
+    return 0;
+}
+
+int Contact::setY(int y) {
+    if(y<0){return -1;}
+    this->y=y;
+    return 0;
+}
+
+int Contact::setContactNum(int contact_num) {
+    if(contact_num<0){return -1;}
+    this->contact_num=contact_num;
+    return 0;
+}
+
+int Contact::setPlateNum(int plate_num) {
+    if(plate_num<0) return -1;
+    this->plate_num=plate_num;
+    return 0;
+}
+
+int Contact::setDevice(Device *device) {
+    if(device==nullptr) return -1;
+    this->device= device;
+    return 0;
 }
 
 Device *Contact::getDevice() {

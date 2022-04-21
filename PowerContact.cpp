@@ -4,15 +4,16 @@
 
 #include "PowerContact.h"
 
-double PowerContact::getPower() {
+double PowerContact::getPower() const {
     return this->power;
 }
 
-PowerContact::PowerContact(int x, int y, int contact_num, int plate_num, double power) {
-    this->x=x;
-    this->y=y;
-    this->contact_num=contact_num;
-    this->plate_num=plate_num;
+PowerContact::PowerContact(Device *device, int x, int y, int contact_num, int plate_num, double power) {
+    this->setX(x);
+    this->setY(y);
+    this->setPlateNum(plate_num);
+    this->setContactNum(contact_num);
+    this->setDevice(device);
     this->power=power;
 }
 

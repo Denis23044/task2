@@ -8,12 +8,12 @@
 
 #include "Contact.h"
 
-class PowerContact : Contact{
+class PowerContact : public Contact{
 private:
     double power;
 public:
-    explicit PowerContact(int x=0, int y=0, int contact_num=0, int plate_num=0, double power=0);
-    double getPower();
+    explicit PowerContact(Device *device, int x=0, int y=0, int contact_num=0, int plate_num=0, double power=0);
+    double getPower() const;
 };
 
 
