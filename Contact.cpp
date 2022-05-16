@@ -2,6 +2,7 @@
 // Created by User on 11.04.2022.
 //
 
+#include <iostream>
 #include "Contact.h"
 
 Contact::Contact(Device *device, int x, int y, int contact_num, int plate_num) {
@@ -57,6 +58,13 @@ int Contact::setDevice(Device *device) {
     return 0;
 }
 
-Device *Contact::getDevice() {
+Device* Contact::getDevice() const{
     return this->device;
+}
+
+void Contact::print() {
+    cout << "Contact Info:" << endl;
+    cout << "\tposition:      [" << this->x << ", " << this->y << "]" << endl;
+    cout << "\tContact number: " << this->contact_num << endl;
+    cout << "\tDevice Name:    " << this->device->getName() << endl;
 }

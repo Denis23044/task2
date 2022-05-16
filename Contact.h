@@ -28,8 +28,9 @@ public:
     int getY() const;
     int getContactNum() const;
     int getPlateNum() const;
-    Device* getDevice();
-
+    void print();
+    Device* getDevice() const;
+    virtual ~Contact()= default;
 };
 
 
