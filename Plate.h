@@ -33,6 +33,7 @@ private:
 
 public:
     explicit Plate(double x1=0, double x2=0, double y1=0, double y2=0, int plateNumber=1);
+   // ~Plate();
     int addContact(Contact * contact); //Добавляет контакт в квадрант. Вызывает разбиение квадранта, если необходимо
     int subDivide();  //Разбивает квадрант
     Contact * nearestNeighbour(Contact *contact);     //Возвращает указатель на ближайшего соседа к заданному контакту

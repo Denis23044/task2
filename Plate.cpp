@@ -227,7 +227,7 @@ Contact * Plate::nearestNeighbour(Contact * contact) {
     //cout << "Plate::nearestNeighbour():\t Came to dist" << endl;
     double dist=Plate::distance(c, contact);
     Contact *c2=this->searchNearest(contact, dist);
-    if (c== nullptr){
+    if (c2== nullptr){
         //searchNearest пытается найти контакт ближе, чем dist, но раз у него не получилось, значит таких нет
         return c;
     }
@@ -270,6 +270,21 @@ int Plate::removeContact(int x, int y) {
                 cout << "Contact deleted: " << endl;
                 this->contacts[i]->print();
                 this->contacts.erase(this->contacts.begin()+i);
+                //Выходит так, что нужно проверять после удаления, нужно ли разделение квадрата
+                /*if(!this->isHead){
+                    //Удалил контакт, теперь нужно проверить, что разделение уже не нужно, и удалить лишние квадраты
+                    //В голове это не нужно
+                    if( (this->parent->NW->contacts.size()+
+                        this->parent->NE->contacts.size()+
+                        this->parent->SW->contacts.size()+
+                        this->parent->SE->contacts.size())<=CAPACITY)
+                    {
+                        delete this->parent->NW;
+                        delete this->parent->NE;
+                        delete this->parent->SW;
+                        delete this->parent->SE;
+                    }
+                }*/
                 return 0;
             }
         }
@@ -396,7 +411,7 @@ Contact * Plate::findNeighbour(Contact *contact) {
     }
     //До этой точки дойду, только если это голова, но это значит, что
     //все квадраты уже проверены, и нужно вернуть nullptr
-    if(this->isHead) return nullptr;
+    return nullptr;
 }
 
 Contact *Plate::checkQuad(Contact *contact) {
@@ -428,7 +443,7 @@ Contact *Plate::checkQuad(Contact *contact) {
 }
 
 double Plate::distance(Contact *c1, Contact *c2) {
-    return sqrt( (c1->getX()-c2->getX())^2 + (c1->getY()-c2->getY())^2 );
+    return hypot(c1->getX() - c2->getX(), c1->getY() - c2->getY());
 }
 
 Contact *Plate::searchNearest(Contact * contact, double dist) {
@@ -489,5 +504,12 @@ Contact *Plate::searchNearest(Contact * contact, double dist) {
     }
     return nullptr;
 }
-
+/*
+Plate::~Plate() {
+    cout << "called destructor of Plate\n";
+    if(!this->isHead){
+        this->parent->contacts.insert(this->parent->contacts.cend(), this->contacts.cbegin(), this->contacts.cend() );
+    }
+}
+*/
 
